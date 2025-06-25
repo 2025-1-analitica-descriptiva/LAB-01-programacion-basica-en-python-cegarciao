@@ -27,3 +27,24 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+def pregunta_08():
+    asociaciones = {}
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            partes = line.strip().split("\t")
+            letra = partes[0]
+            numero = int(partes[1])
+            if numero in asociaciones:
+                if letra not in asociaciones[numero]:
+                    asociaciones[numero].append(letra)
+            else:
+                asociaciones[numero] = [letra]
+
+    resultado = []
+    for numero in sorted(asociaciones.keys()):
+        letras_ordenadas = sorted(asociaciones[numero])
+        resultado.append((numero, letras_ordenadas))
+    
+    return resultado
+
+print(pregunta_08())
